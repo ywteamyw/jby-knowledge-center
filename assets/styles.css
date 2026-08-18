@@ -288,9 +288,9 @@ section{position:relative}
 .list-wrap{display:grid;grid-template-columns:264px 1fr;gap:48px;align-items:start}
 .list-wrap.no-side{grid-template-columns:1fr}
 .sidebar{position:sticky;top:120px;display:flex;flex-direction:column;gap:34px}
-.filter-group h4{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:14px}
-.sub-list{display:flex;flex-direction:column;gap:3px}
-.sub-list a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;font-size:16px;color:var(--c2);transition:color .2s}
+.filter-group h4{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:var(--c4);margin-bottom:10px}
+.sub-list{display:flex;flex-direction:column;gap:1px}
+.sub-list a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0;font-size:16px;color:var(--c4);transition:color .2s}
 .sub-list a:hover{color:var(--ink)}
 .sub-list a.active{color:var(--navy)}
 .sub-list a .lbl{position:relative}
