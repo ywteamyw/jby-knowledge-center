@@ -50,7 +50,7 @@
       ["Boats for Sale","https://www.jeffbrownyachts.com"],
       ["Brands","https://www.jeffbrownyachts.com"],
       ["Services","https://www.jeffbrownyachts.com"],
-      ["News & Media","index.html"],
+      ["Knowledge Center","index.html"],
       ["Events","https://www.jeffbrownyachts.com"],
       ["About JBY","https://www.jeffbrownyachts.com"],
       ["Contact","https://www.jeffbrownyachts.com"]
