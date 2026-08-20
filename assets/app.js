@@ -35,8 +35,8 @@
   function kcnavHTML(){
     var cur = document.body.dataset.kc || "";
     var items = [
-      ["all","All"],["articles","Articles"],["videos","Videos"],
-      ["events","Past Events"],["owner","Owner Stories"],["news","News"]
+      ["all","All"],["videos","Videos"],["events","Past Events"],
+      ["articles","Articles"],["news","News"]
     ];
     var links = items.map(function(it){
       return '<a href="index.html#'+it[0]+'" data-tab="'+it[0]+'"'+(cur===it[0]?' class="active"':'')+'>'+it[1]+'</a>';
@@ -112,10 +112,9 @@
           '<div class="foot-logo"><img src="'+LOGO+'" alt="Jeff Brown Yachts"/></div>'+
           '<nav class="foot-nav">'+
             '<a href="index.html#all">Knowledge Center</a><span class="sep">/</span>'+
-            '<a href="index.html#articles">Articles</a><span class="sep">/</span>'+
             '<a href="index.html#videos">Videos</a><span class="sep">/</span>'+
             '<a href="index.html#events">Past Events</a><span class="sep">/</span>'+
-            '<a href="index.html#owner">Owner Stories</a><span class="sep">/</span>'+
+            '<a href="index.html#articles">Articles</a><span class="sep">/</span>'+
             '<a href="index.html#news">News</a>'+
           '</nav>'+
         '</div>'+
