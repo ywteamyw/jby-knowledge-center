@@ -423,3 +423,20 @@ footer.site{background:var(--page);padding:48px 40px 40px;color:var(--c2);font-s
 .casc>*{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out);will-change:opacity,transform}
 .casc>.lx-in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal,.casc>*{transition:none!important;opacity:1!important;transform:none!important}html{scroll-behavior:auto}}
+
+/* ====================================================================== */
+/* ARTICLE CARDS — matched to the search results page                      */
+/* A contained white card with a hairline and a 2px radius; the photo      */
+/* still zooms, the card itself never darkens; the meta sits on a foot     */
+/* rule so cards of different title lengths still line up.                 */
+/* ====================================================================== */
+.acard{background:var(--white);border:0.5px solid var(--line);border-radius:2px;overflow:hidden;
+  gap:0;transition:box-shadow .3s ease, border-color .3s ease}
+.acard:hover{box-shadow:0 5px 16px rgba(20,26,32,0.06);border-color:rgba(0,0,0,0.06)}
+.acard .thumb{aspect-ratio:16/10;border:0;border-radius:0}
+.acard .thumb::after{display:none}          /* no dark wash over the photo */
+.acard .badge{display:none}                 /* category tag off, as on search */
+.acard h3{font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:20px;line-height:28px;
+  letter-spacing:0;text-transform:none;color:var(--ink);padding:20px 22px 0}
+.acard .date{margin:auto 22px 22px;padding-top:16px;border-top:0.5px solid var(--line);
+  font-size:16px;line-height:24px;letter-spacing:0;color:#2a2a36}
