@@ -97,9 +97,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* Video cards — hover autoplay + subtle white lift/shadow (video cards only) */
 .vcard{position:relative;border-radius:2px;gap:14px}
-.vcard::before{content:"";position:absolute;inset:-16px;border-radius:2px;background:var(--section);
-  border:1px solid var(--border);opacity:0;transition:opacity .35s var(--ease-out);z-index:0}
-.vcard:hover::before{opacity:1}
+.vcard::before{content:none}
 .vcard>*{position:relative;z-index:1}
 .vcard .thumb{border:none;border-radius:2px}
 .vcard .thumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s var(--ease-out);z-index:1}
@@ -255,14 +253,20 @@ section{position:relative}
 .ecard{position:relative;display:block;border-radius:2px;overflow:hidden;aspect-ratio:16/10;color:#fff;border:1px solid var(--border)}
 .ecard img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease-out)}
 .ecard:hover img{transform:scale(1.05)}
-.ecard::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(12,20,26,0) 30%,rgba(12,20,26,.5) 62%,rgba(10,16,20,.9))}
-.ecard .ec-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:28px 28px 26px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.ecard::after{content:"";position:absolute;inset:0;z-index:1;transition:background .4s var(--ease-out);
+  background:linear-gradient(180deg,rgba(10,16,20,0) 34%,rgba(10,16,20,.5) 64%,rgba(8,13,17,.92))}
+.ecard:hover::after{background:linear-gradient(180deg,rgba(10,16,20,.1) 24%,rgba(10,16,20,.62) 58%,rgba(8,13,17,.95))}
+.ecard .ec-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:26px 26px 24px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
 .ecard h3{order:1;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:18px;line-height:23px;text-transform:uppercase;color:#fff}
-.ecard .ec-meta{order:2;font-family:'Mesmerize',sans-serif;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--sand)}
-.ecard .ec-cta{order:3;margin-top:12px;display:inline-flex;align-items:center;gap:8px;font-family:'Mesmerize',sans-serif;font-size:16px;letter-spacing:.04em;
-  text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.6);padding:10px 16px;border-radius:2px;transition:.25s}
-.ecard:hover .ec-cta{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.ecard .ec-cta svg{width:15px;height:15px}
+.ecard .ec-meta{order:2;font-family:'Mesmerize',sans-serif;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+/* View Recap button reveals from the bottom on hover */
+.ecard .ec-cta{order:3;opacity:0;max-height:0;margin-top:0;overflow:hidden;display:inline-flex;align-items:center;gap:8px;
+  font-family:'Mesmerize',sans-serif;font-size:16px;letter-spacing:.04em;text-transform:uppercase;color:#fff;
+  border:1px solid rgba(255,255,255,.7);padding:8px 14px;border-radius:2px;white-space:nowrap;
+  transition:opacity .3s var(--ease-out),max-height .4s var(--ease-out),margin-top .4s var(--ease-out),background .25s}
+.ecard:hover .ec-cta{opacity:1;max-height:48px;margin-top:14px}
+.ecard .ec-cta:hover{background:rgba(255,255,255,.18)}
+.ecard .ec-cta svg{width:14px;height:14px}
 
 /* =====================================================================
    FEATURED STORY (large cinematic editorial block)
