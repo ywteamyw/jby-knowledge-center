@@ -415,6 +415,26 @@ section{position:relative}
 .evgal .eg-play svg{width:24px;height:24px;margin-left:3px}
 @media(max-width:640px){.evgal{height:440px}.evgal .eg-word{bottom:104px;font-size:20px}.evgal .eg-thumbs{gap:8px;padding:0 14px;justify-content:flex-start;bottom:36px}.evgal .eg-thumb{width:104px;height:66px}.evgal .eg-arrow{width:40px;height:40px;left:12px}.evgal .eg-arrow.next{right:12px;left:auto}}
 
+/* Search results (in-hub) — mirrors the jby-search results page */
+.sr-head{padding:4px 0 34px}
+.sr-title{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 8px}
+.sr-title h1{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:22px;line-height:32px;letter-spacing:0;text-transform:uppercase;color:var(--navy);margin:0}
+.sr-title h1 span{color:var(--ink)}
+.sr-clear{width:34px;height:34px;border:0;background:transparent;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .2s}
+.sr-clear svg{width:18px;height:18px}
+.sr-clear:hover{opacity:.55}
+.sr-count{font-size:15px;line-height:22px;color:var(--c4);margin:0}
+.sr-block{padding:0}
+.sr-block + .sr-block{border-top:0.5px solid var(--line);padding-top:44px;margin-top:44px}
+.sr-secline{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin:0 0 26px}
+.sr-secline h2{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:20px;line-height:28px;letter-spacing:0;text-transform:uppercase;color:var(--ink);margin:0}
+.sr-secline h2 .sr-n{color:var(--c4);margin-left:9px}
+.sr-secline .link-arrow{flex:0 0 auto}
+.sr-empty{padding:16px 0 90px}
+.sr-empty h2{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:30px;line-height:44px;letter-spacing:0;text-transform:none;color:var(--ink);margin:0 0 10px}
+.sr-empty h2 span{color:var(--navy)}
+.sr-empty p{font-size:16px;line-height:24px;color:var(--c4);margin:0 0 24px;max-width:520px}
+
 /* Article detail (Insights & News) — light, no gradient hero */
 .article-top{background:var(--section);padding:30px 0 66px}
 .article-top .dh-crumbs{margin-bottom:30px}
