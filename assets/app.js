@@ -266,6 +266,37 @@
     });
   });
 
+  /* ---------- Archive sidebar filters (Videos / Past Events / Insights) ---------- */
+  document.querySelectorAll(".list-wrap").forEach(function(wrap){
+    var grid = wrap.querySelector(".media-grid,.egrid");
+    var groups = wrap.querySelectorAll(".sub-list[data-filter]");
+    if(!grid || !groups.length) return;
+    var state = {};
+    groups.forEach(function(g){ state[g.dataset.filter] = "all"; });
+    function apply(){
+      [].forEach.call(grid.children, function(card){
+        if(card.nodeName !== "A" && !card.classList.contains("card") && !card.classList.contains("ecard")){ return; }
+        var show = true, k;
+        for(k in state){
+          if(state[k] !== "all" && (card.dataset[k] || "") !== state[k]){ show = false; break; }
+        }
+        card.style.display = show ? "" : "none";
+      });
+    }
+    groups.forEach(function(g){
+      var key = g.dataset.filter;
+      g.querySelectorAll("a[data-val]").forEach(function(a){
+        a.addEventListener("click", function(e){
+          e.preventDefault();
+          state[key] = a.dataset.val;
+          g.querySelectorAll("a").forEach(function(x){ x.classList.remove("active"); });
+          a.classList.add("active");
+          apply();
+        });
+      });
+    });
+  });
+
   /* ---------- Demo search (no backend) — jump to Insights & News ---------- */
   document.querySelectorAll("form[data-search]").forEach(function(f){
     f.addEventListener("submit", function(e){ e.preventDefault();

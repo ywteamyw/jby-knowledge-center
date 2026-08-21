@@ -385,6 +385,11 @@ section{position:relative}
 .gallery a{position:relative;border-radius:2px;overflow:hidden;aspect-ratio:4/3;display:block;border:1px solid var(--border)}
 .gallery img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease-out)}
 .gallery a:hover img{transform:scale(1.06)}
+.gallery .play{pointer-events:none}
+
+/* Embedded video player (video detail + event main video) */
+.videoframe{position:relative;max-width:1040px;margin:0 auto;aspect-ratio:16/9;border-radius:2px;overflow:hidden;background:#0c141a;box-shadow:0 44px 100px -60px rgba(0,0,0,.6)}
+.videoframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
 /* Vessels-on-display mini cards */
 .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
