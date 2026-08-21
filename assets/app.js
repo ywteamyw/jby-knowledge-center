@@ -35,8 +35,7 @@
   function kcnavHTML(){
     var cur = document.body.dataset.kc || "";
     var items = [
-      ["all","All"],["videos","Videos"],["events","Past Events"],
-      ["articles","Articles"],["news","News"]
+      ["all","All"],["videos","Videos"],["events","Past Events"],["insights","Insights & News"]
     ];
     var links = items.map(function(it){
       return '<a href="index.html#'+it[0]+'" data-tab="'+it[0]+'"'+(cur===it[0]?' class="active"':'')+'>'+it[1]+'</a>';
@@ -114,8 +113,7 @@
             '<a href="index.html#all">Knowledge Center</a><span class="sep">/</span>'+
             '<a href="index.html#videos">Videos</a><span class="sep">/</span>'+
             '<a href="index.html#events">Past Events</a><span class="sep">/</span>'+
-            '<a href="index.html#articles">Articles</a><span class="sep">/</span>'+
-            '<a href="index.html#news">News</a>'+
+            '<a href="index.html#insights">Insights &amp; News</a>'+
           '</nav>'+
         '</div>'+
         '<div class="foot-col reveal d1">'+
@@ -244,11 +242,35 @@
     show((location.hash||"").replace("#","")||"all");
   })();
 
-  /* ---------- Demo search (no backend) — jump to the News tab ---------- */
+  /* ---------- Video cards — autoplay preview on hover ---------- */
+  document.querySelectorAll(".vcard").forEach(function(card){
+    var v = card.querySelector("video");
+    if(!v) return;
+    card.addEventListener("mouseenter", function(){ try{ v.currentTime=0; var p=v.play(); if(p&&p.catch)p.catch(function(){}); }catch(e){} });
+    card.addEventListener("mouseleave", function(){ try{ v.pause(); }catch(e){} });
+  });
+
+  /* ---------- Insights & News category filter ---------- */
+  document.querySelectorAll("[data-insights-filter]").forEach(function(bar){
+    var scope = bar.closest("section") || document;
+    var grid = scope.querySelector("[data-insights-grid]");
+    if(!grid) return;
+    bar.querySelectorAll("[data-cat]").forEach(function(chip){
+      chip.addEventListener("click", function(){
+        var cat = chip.dataset.cat;
+        bar.querySelectorAll("[data-cat]").forEach(function(c){ c.classList.toggle("solid", c===chip); });
+        grid.querySelectorAll("[data-cat]").forEach(function(card){
+          card.style.display = (cat==="all" || card.dataset.cat===cat) ? "" : "none";
+        });
+      });
+    });
+  });
+
+  /* ---------- Demo search (no backend) — jump to Insights & News ---------- */
   document.querySelectorAll("form[data-search]").forEach(function(f){
     f.addEventListener("submit", function(e){ e.preventDefault();
-      var t=document.querySelector('.kcnav a[data-tab="news"]');
-      if(t){ t.click(); } else { window.location.href="index.html#news"; }
+      var t=document.querySelector('.kcnav a[data-tab="insights"]');
+      if(t){ t.click(); } else { window.location.href="index.html#insights"; }
     });
   });
 })();
