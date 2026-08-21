@@ -97,8 +97,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* Video cards — hover autoplay + subtle white lift/shadow (video cards only) */
 .vcard{position:relative;border-radius:10px;gap:14px}
-.vcard::before{content:"";position:absolute;inset:-16px;border-radius:16px;background:#fff;
-  box-shadow:0 28px 64px -34px rgba(34,51,63,.55);opacity:0;transition:opacity .35s var(--ease-out);z-index:0}
+.vcard::before{content:"";position:absolute;inset:-16px;border-radius:16px;background:var(--section);
+  box-shadow:0 26px 60px -36px rgba(34,51,63,.4);opacity:0;transition:opacity .35s var(--ease-out);z-index:0}
 .vcard:hover::before{opacity:1}
 .vcard>*{position:relative;z-index:1}
 .vcard .thumb{border:none;border-radius:8px}
