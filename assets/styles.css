@@ -37,8 +37,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   font-family:'Mesmerize',sans-serif;font-weight:300;text-transform:uppercase;letter-spacing:0;transition:.25s;white-space:nowrap}
 .btn-sm{height:44px;padding:0 22px;font-size:16px;line-height:20px}
 .btn-md{height:50px;padding:0 26px;font-size:16px;line-height:20px}
-.btn svg{width:17px;height:17px;transition:transform .4s var(--ease-out)}
-.btn:hover svg{transform:translateX(4px)}
+.btn svg{width:17px;height:17px}
 .btn-solid{background:var(--navy);color:var(--white)}
 .btn-solid:hover{background:var(--navy-d)}
 .btn-white{background:var(--white);color:var(--ink)}
@@ -53,8 +52,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .btn-ghost-light:hover{background:var(--white);color:var(--ink)}
 .link-arrow{display:inline-flex;align-items:center;gap:8px;font-family:'Mesmerize',sans-serif;text-transform:uppercase;
   font-size:16px;letter-spacing:.04em;color:var(--navy)}
-.link-arrow svg{width:16px;height:16px;transition:transform .35s var(--ease-out)}
-.link-arrow:hover svg{transform:translateX(4px)}
+.link-arrow svg{width:16px;height:16px}
+.link-arrow:hover{color:var(--navy-d)}
 
 /* =====================================================================
    HEADER
@@ -258,7 +257,7 @@ section{position:relative}
 .ecard:hover::after{background:linear-gradient(180deg,rgba(10,16,20,.1) 24%,rgba(10,16,20,.62) 58%,rgba(8,13,17,.95))}
 .ecard .ec-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:26px 26px 24px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
 .ecard h3{order:1;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:18px;line-height:23px;text-transform:uppercase;color:#fff}
-.ecard .ec-meta{order:2;font-family:'Mesmerize',sans-serif;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.ecard .ec-meta{order:2;font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:14px;line-height:20px;letter-spacing:.02em;color:#fff}
 /* View Recap button reveals from the bottom on hover */
 .ecard .ec-cta{order:3;opacity:0;max-height:0;margin-top:0;overflow:hidden;display:inline-flex;align-items:center;gap:8px;
   font-family:'Mesmerize',sans-serif;font-size:16px;letter-spacing:.04em;text-transform:uppercase;color:#fff;
@@ -411,8 +410,9 @@ section{position:relative}
 .cta-band{background:var(--navy);color:#fff;text-align:center}
 .cta-band .cb-inner{max-width:720px;margin:0 auto;padding:72px 40px;display:flex;flex-direction:column;align-items:center;gap:18px}
 .cta-band h2{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:30px;line-height:40px;text-transform:uppercase}
-.cta-band p{color:rgba(255,255,255,.92);font-size:17px;line-height:27px;max-width:560px}
-.cta-band .actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.cta-band p{color:rgba(255,255,255,.92);font-size:17px;line-height:27px;max-width:760px}
+.cta-band .actions{display:flex;gap:14px;flex-wrap:nowrap;justify-content:center;margin-top:8px}
+@media(max-width:520px){.cta-band .actions{flex-wrap:wrap}}
 @media(max-width:640px){.cta-band h2{font-size:25px;line-height:34px}.cta-band .cb-inner{padding:56px 24px}}
 
 /* =====================================================================

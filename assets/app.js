@@ -12,7 +12,7 @@
   /* ---------- Icons ---------- */
   var I = {
     search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
-    arrow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>',
+    arrow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 6 6 6-6 6"/></svg>',
     close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg>',
     up:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m18 15-6-6-6 6"/></svg>'
   };
@@ -94,7 +94,7 @@
     return ''+
     '<section class="cta-band"><div class="cb-inner">'+
       '<h2 class="reveal">Still have questions?</h2>'+
-      '<p class="reveal d1">Our specialists are here to help you choose, finance, and care for the right yacht. Reach out and a Jeff Brown Yachts expert will get back to you within one business day.</p>'+
+      '<p class="reveal d1">Our specialists are here to help, from choosing the right yacht to caring for it.</p>'+
       '<div class="actions reveal d1">'+
         '<a class="btn btn-md btn-white" href="https://www.jeffbrownyachts.com" target="_blank" rel="noopener">Contact an expert</a>'+
         '<a class="btn btn-md btn-ghost-light" href="https://www.jeffbrownyachts.com" target="_blank" rel="noopener">Browse boats for sale</a>'+
