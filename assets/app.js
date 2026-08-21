@@ -110,10 +110,12 @@
         '<div class="reveal">'+
           '<div class="foot-logo"><img src="'+LOGO+'" alt="Jeff Brown Yachts"/></div>'+
           '<nav class="foot-nav">'+
-            '<a href="index.html#all">Knowledge Center</a><span class="sep">/</span>'+
-            '<a href="index.html#videos">Videos</a><span class="sep">/</span>'+
-            '<a href="index.html#events">Past Events</a><span class="sep">/</span>'+
-            '<a href="index.html#insights">Insights &amp; News</a>'+
+            '<a href="https://www.jeffbrownyachts.com">Home</a><span class="sep">/</span>'+
+            '<a href="https://www.jeffbrownyachts.com">Portfolio</a><span class="sep">/</span>'+
+            '<a href="https://www.jeffbrownyachts.com">Brands</a><span class="sep">/</span>'+
+            '<a href="https://www.jeffbrownyachts.com">Services</a><span class="sep">/</span>'+
+            '<a href="https://www.jeffbrownyachts.com">Experiences</a><span class="sep">/</span>'+
+            '<a href="https://www.jeffbrownyachts.com">About JBY</a>'+
           '</nav>'+
         '</div>'+
         '<div class="foot-col reveal d1">'+

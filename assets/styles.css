@@ -40,8 +40,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .btn svg{width:17px;height:17px}
 .btn-solid{background:var(--navy);color:var(--white)}
 .btn-solid:hover{background:var(--navy-d)}
-.btn-white{background:var(--white);color:var(--ink)}
-.btn-white:hover{background:var(--ink);color:var(--white)}
+.btn-white{background:#e4e4e7;color:var(--ink);border:1px solid #e4e4e7}
+.btn-white:hover{background:transparent;color:var(--white);border-color:var(--white)}
 .btn-dark{background:var(--ink);color:var(--white)}
 .btn-dark:hover{background:var(--navy)}
 .btn-ghost{background:transparent;color:var(--c0);border:1px solid var(--c0)}
@@ -221,8 +221,8 @@ section{position:relative}
 .card:hover .thumb img{transform:scale(1.06)}
 .card .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.28));opacity:0;transition:opacity .4s}
 .card:hover .thumb::after{opacity:1}
-.card .badge{position:absolute;left:12px;top:12px;z-index:2;background:rgba(24,40,51,.82);backdrop-filter:blur(6px);color:#fff;
-  font-family:'Mesmerize',sans-serif;font-size:16px;line-height:1;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border-radius:2px}
+.card .badge{position:absolute;left:12px;top:12px;z-index:2;background:rgba(65,100,123,.92);backdrop-filter:blur(6px);color:#fff;
+  font-family:'Mesmerize',sans-serif;font-size:14px;line-height:1;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:2px}
 .card .dur{position:absolute;right:12px;bottom:12px;z-index:2;background:rgba(0,0,0,.72);color:#fff;font-size:16px;font-weight:400;padding:4px 10px;border-radius:2px;letter-spacing:.02em}
 /* square, semi-transparent play button with a white icon */
 .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:58px;height:58px;border-radius:2px;
@@ -436,7 +436,7 @@ footer.site{background:var(--page);padding:48px 40px 40px;color:var(--c2);font-s
 .foot-locs a{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;line-height:20px;letter-spacing:0;text-transform:uppercase;color:var(--c0);transition:color .2s}
 .foot-locs a:hover{color:var(--navy)}
 .to-top{width:44px;height:44px;border-radius:2px;background:rgba(0,0,0,0.72);color:#fff;display:flex;align-items:center;justify-content:center;transition:.25s;justify-self:end;align-self:start;margin-top:112px}
-.to-top:hover{background:var(--navy)}.to-top svg{width:20px;height:20px}
+.to-top:hover{background:#000}.to-top svg{width:20px;height:20px}
 @media(max-width:860px){.foot-grid{grid-template-columns:1fr 1fr}.foot-col{padding-top:0}.to-top{justify-self:start;margin-top:0}}
 @media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
 
