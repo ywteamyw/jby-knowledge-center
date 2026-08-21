@@ -25,7 +25,7 @@
       '<div class="left"><button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button></div>'+
       '<a class="logo" href="index.html" aria-label="Jeff Brown Yachts — Knowledge Center"><img src="'+LOGO+'" alt="Jeff Brown Yachts"/></a>'+
       '<div class="right">'+
-        '<a class="icon" href="index.html#all" aria-label="Search the Knowledge Center">'+I.search+'</a>'+
+        '<a class="icon" href="search.html" aria-label="Search the Knowledge Center">'+I.search+'</a>'+
         '<a class="cta" href="https://www.jeffbrownyachts.com" target="_blank" rel="noopener">Contact an expert</a>'+
       '</div>'+
     '</nav>';
@@ -326,13 +326,13 @@
     if(n){ n.addEventListener("click", function(){ set(cur+1); }); }
   });
 
-  /* ---------- Site search — real, in-hub results across the KC content ----------
-     Harvests the archive panels' own cards (so the index never drifts from the
-     markup), matches on all query tokens, and renders results grouped by type
-     in the same card components — mirroring the jby-search results page.       */
+  /* ---------- Search page (search.html?query=…) ------------------------------
+     A dedicated results page. It fetches the hub and harvests its own cards
+     (so the index never drifts from the markup), matches on all query tokens,
+     and renders results grouped by type in the same card components.          */
   (function(){
     var wrap = document.getElementById("sr-wrap");
-    if(!wrap) return;                        /* only on the hub page (index) */
+    if(!wrap || document.body.dataset.kc !== "search") return;   /* search.html only */
 
     var SECTIONS = [
       {sel:"#panel-videos .vcard",   label:"Videos",           tab:"videos"},
@@ -344,69 +344,53 @@
       var d = ""; for(var k in c.dataset){ if(k!=="hoverbound") d += " " + c.dataset[k]; }
       return (c.textContent + " " + (c.getAttribute("href")||"") + d).toLowerCase();
     }
+    function param(n){ var m=new RegExp("[?&]"+n+"=([^&]+)").exec(location.search); return m?decodeURIComponent(m[1].replace(/\+/g," ")):""; }
 
-    function run(q){
-      q = (q||"").trim();
-      var tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
-      var total = 0, blocks = "";
-      if(tokens.length){
-        SECTIONS.forEach(function(sec){
-          var seen = {}, hits = [];
-          [].forEach.call(document.querySelectorAll(sec.sel), function(c){
-            var href = c.getAttribute("href") || "";
-            if(seen[href]) return;
-            var text = cardText(c);
-            if(tokens.every(function(t){ return text.indexOf(t) >= 0; })){ seen[href]=1; hits.push(c); }
-          });
-          if(!hits.length) return;
-          total += hits.length;
-          var grid = hits.map(function(c){ return c.outerHTML; }).join("");
-          blocks += '<div class="sr-block"><div class="sr-secline">'+
-            '<h2>'+sec.label+'<span class="sr-n">('+hits.length+')</span></h2>'+
-            '<a class="link-arrow" href="index.html#'+sec.tab+'" data-tab="'+sec.tab+'">See all '+I.arrow+'</a>'+
-            '</div><div class="media-grid cols-3">'+grid+'</div></div>';
+    var q = param("query").trim();
+    var inp = document.getElementById("sr-input"); if(inp) inp.value = q;
+    document.title = (q ? 'Search: '+q : 'Search') + ' — Jeff Brown Yachts';
+
+    function render(doc){
+      var tokens = q.toLowerCase().split(/\s+/).filter(Boolean), total = 0, blocks = "";
+      SECTIONS.forEach(function(sec){
+        var seen = {}, hits = [];
+        [].forEach.call(doc.querySelectorAll(sec.sel), function(c){
+          var href = c.getAttribute("href") || ""; if(seen[href]) return;
+          if(tokens.every(function(t){ return cardText(c).indexOf(t) >= 0; })){ seen[href]=1; hits.push(c); }
         });
-      }
+        if(!hits.length) return;
+        total += hits.length;
+        var grid = hits.map(function(c){ return c.outerHTML; }).join("");
+        blocks += '<div class="sr-block"><div class="sr-secline">'+
+          '<h2>'+sec.label+'<span class="sr-n">('+hits.length+')</span></h2>'+
+          '<a class="link-arrow" href="index.html#'+sec.tab+'">See all '+I.arrow+'</a>'+
+          '</div><div class="media-grid cols-3">'+grid+'</div></div>';
+      });
       var head = '<div class="sr-head"><div class="sr-title">'+
-        '<h1>Results for <span>&ldquo;'+esc(q)+'&rdquo;</span></h1>'+
-        '<button class="sr-clear" id="sr-clear" aria-label="Clear search">'+I.close+'</button>'+
-        '</div><p class="sr-count">'+total+' result'+(total===1?"":"s")+'</p></div>';
+        '<h1>Results for <span>&ldquo;'+esc(q)+'&rdquo;</span></h1></div>'+
+        '<p class="sr-count">'+total+' result'+(total===1?"":"s")+'</p></div>';
       if(total){
         wrap.innerHTML = head + blocks;
       } else {
         wrap.innerHTML = head +
           '<div class="sr-empty"><h2>No results for <span>&ldquo;'+esc(q)+'&rdquo;</span></h2>'+
           '<p>Try a different search, or browse everything in the Knowledge Center.</p>'+
-          '<a class="btn btn-md btn-solid" href="index.html#all" data-tab="all"><span>Browse all</span></a></div>';
+          '<a class="btn btn-md btn-solid" href="index.html#all"><span>Browse all</span></a></div>';
       }
       bindHover(wrap);
-      var clr = document.getElementById("sr-clear");
-      if(clr){ clr.addEventListener("click", function(){
-        var inp = document.querySelector('form[data-search] input[name="q"]'); if(inp) inp.value = "";
-        if(hubShow) hubShow("all");
-        if(history.replaceState) history.replaceState(null,"",location.pathname+"#all");
-      }); }
-      if(hubShow) hubShow("search");
-      var panels = document.querySelector(".hub-panels");
-      if(panels){ var y = panels.getBoundingClientRect().top + window.scrollY - 80; window.scrollTo({top:y<0?0:y, behavior:"smooth"}); }
     }
 
-    document.querySelectorAll("form[data-search]").forEach(function(f){
-      f.addEventListener("submit", function(e){
-        e.preventDefault();
-        var inp = f.querySelector('input[name="q"]'); var q = inp ? inp.value : "";
-        if(!q.trim()) return;
-        if(history.replaceState) history.replaceState(null,"","?q="+encodeURIComponent(q.trim()));
-        run(q);
-      });
+    if(!q){
+      wrap.innerHTML = '<div class="sr-empty"><h2>Search the Knowledge Center</h2>'+
+        '<p>Search for a brand, model, event, or story to find matching videos, past events, and insights.</p></div>';
+      return;
+    }
+    fetch("index.html").then(function(r){ return r.text(); }).then(function(html){
+      render(new DOMParser().parseFromString(html, "text/html"));
+    }).catch(function(){
+      wrap.innerHTML = '<div class="sr-head"><div class="sr-title"><h1>Results for <span>&ldquo;'+esc(q)+'&rdquo;</span></h1></div></div>'+
+        '<div class="sr-empty"><p>Unable to load results right now.</p>'+
+        '<a class="btn btn-md btn-solid" href="index.html#all"><span>Browse the Knowledge Center</span></a></div>';
     });
-
-    /* deep link: index.html?q=riva */
-    var m = /[?&]q=([^&]+)/.exec(location.search);
-    if(m){
-      var q0 = decodeURIComponent(m[1].replace(/\+/g," "));
-      var inp0 = document.querySelector('form[data-search] input[name="q"]'); if(inp0) inp0.value = q0;
-      run(q0);
-    }
   })();
 })();
