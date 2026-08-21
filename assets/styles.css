@@ -244,6 +244,8 @@ section{position:relative}
 .tag.solid{background:var(--navy);color:#fff;border-color:var(--navy)}
 
 .acard .thumb{aspect-ratio:16/11}
+.acard .date{display:flex;align-items:center;padding-top:15px;border-top:1px solid var(--border);font-size:16px;color:var(--c4);letter-spacing:.01em}
+.acard .date .rt{margin-left:14px;padding-left:14px;border-left:1px solid #d4d4db}
 
 /* =====================================================================
    EVENT overlay cards (past events)
