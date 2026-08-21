@@ -299,6 +299,26 @@
     });
   });
 
+  /* ---------- Gallery (Photos / Videos): thumb click + prev/next ---------- */
+  document.querySelectorAll(".evgal").forEach(function(g){
+    var hero = g.querySelector(".eg-hero img");
+    var play = g.querySelector(".eg-play");
+    var thumbs = [].slice.call(g.querySelectorAll(".eg-thumb"));
+    if(!thumbs.length){ return; }
+    var cur = 0;
+    function set(i){
+      cur = (i + thumbs.length) % thumbs.length;
+      var t = thumbs[cur];
+      if(hero){ hero.src = t.getAttribute("data-full") || t.querySelector("img").src; }
+      if(play && t.getAttribute("data-href")){ play.setAttribute("href", t.getAttribute("data-href")); }
+      thumbs.forEach(function(x,j){ x.classList.toggle("active", j===cur); });
+    }
+    thumbs.forEach(function(t,i){ t.addEventListener("click", function(){ set(i); }); });
+    var p = g.querySelector(".eg-arrow.prev"), n = g.querySelector(".eg-arrow.next");
+    if(p){ p.addEventListener("click", function(){ set(cur-1); }); }
+    if(n){ n.addEventListener("click", function(){ set(cur+1); }); }
+  });
+
   /* ---------- Demo search (no backend) — jump to Insights & News ---------- */
   document.querySelectorAll("form[data-search]").forEach(function(f){
     f.addEventListener("submit", function(e){ e.preventDefault();
