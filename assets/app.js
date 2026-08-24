@@ -275,21 +275,63 @@
     });
   });
 
-  /* ---------- Archive sidebar filters (Videos / Past Events / Insights) ---------- */
+  /* ---------- Archive panels: sidebar filters + working pagination ----------
+     One controller per .list-wrap. It tracks the filter state AND the current
+     page, then shows only the current page's slice of the filter-matching
+     cards. The pager is rebuilt from the real page count and its clicks page
+     in place (they never touch the URL hash, so the tab never changes).      */
+  var CHEV_L = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m15 6-6 6 6 6"/></svg>';
+  var CHEV_R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 6 6 6-6 6"/></svg>';
   document.querySelectorAll(".list-wrap").forEach(function(wrap){
     var grid = wrap.querySelector(".media-grid,.egrid");
+    if(!grid) return;
+    var pager = wrap.querySelector(".pager");
     var groups = wrap.querySelectorAll(".sub-list[data-filter]");
-    if(!grid || !groups.length) return;
-    var state = {};
-    groups.forEach(function(g){ state[g.dataset.filter] = "all"; });
+    var perPage = parseInt(wrap.dataset.perPage, 10) || 6;
+    var cards = [].filter.call(grid.children, function(c){
+      return c.nodeName === "A" || c.classList.contains("card") || c.classList.contains("ecard");
+    });
+    var state = {}; groups.forEach(function(g){ state[g.dataset.filter] = "all"; });
+    var page = 1;
+
+    function matches(card){
+      for(var k in state){ if(state[k] !== "all" && (card.dataset[k] || "") !== state[k]) return false; }
+      return true;
+    }
+    function renderPager(pages){
+      if(!pager) return;
+      if(pages <= 1){ pager.style.display = "none"; pager.innerHTML = ""; return; }
+      pager.style.display = "";
+      var nums = "";
+      for(var i = 1; i <= pages; i++){
+        nums += '<a class="pg-num'+(i===page?' is-current':'')+'" href="#" data-page="'+i+'">'+i+'</a>';
+      }
+      pager.innerHTML =
+        '<a class="pg-prev" href="#" data-page="'+(page-1)+'"'+(page===1?' aria-disabled="true"':'')+'>'+CHEV_L+'<span>Back</span></a>'+
+        '<span class="pg-nums">'+nums+'</span>'+
+        '<a class="pg-next" href="#" data-page="'+(page+1)+'"'+(page===pages?' aria-disabled="true"':'')+'><span>Next</span>'+CHEV_R+'</a>';
+    }
     function apply(){
-      [].forEach.call(grid.children, function(card){
-        if(card.nodeName !== "A" && !card.classList.contains("card") && !card.classList.contains("ecard")){ return; }
-        var show = true, k;
-        for(k in state){
-          if(state[k] !== "all" && (card.dataset[k] || "") !== state[k]){ show = false; break; }
-        }
-        card.style.display = show ? "" : "none";
+      var vis = cards.filter(matches);
+      var pages = Math.max(1, Math.ceil(vis.length / perPage));
+      if(page > pages) page = pages;
+      var start = (page - 1) * perPage, end = start + perPage;
+      cards.forEach(function(c){ c.style.display = "none"; });
+      vis.forEach(function(c, i){ if(i >= start && i < end) c.style.display = ""; });
+      renderPager(pages);
+    }
+
+    if(pager){
+      pager.addEventListener("click", function(e){
+        var a = e.target.closest && e.target.closest("[data-page]");
+        if(!a) return;
+        e.preventDefault();
+        if(a.getAttribute("aria-disabled") === "true") return;
+        var p = parseInt(a.dataset.page, 10);
+        if(isNaN(p) || p < 1) return;
+        page = p; apply();
+        var top = grid.getBoundingClientRect().top + window.scrollY - 120;
+        window.scrollTo({ top: top < 0 ? 0 : top, behavior: "smooth" });
       });
     }
     groups.forEach(function(g){
@@ -297,13 +339,15 @@
       g.querySelectorAll("a[data-val]").forEach(function(a){
         a.addEventListener("click", function(e){
           e.preventDefault();
-          state[key] = a.dataset.val;
+          state[key] = a.dataset.val; page = 1;
           g.querySelectorAll("a").forEach(function(x){ x.classList.remove("active"); });
           a.classList.add("active");
           apply();
         });
       });
     });
+
+    apply();
   });
 
   /* ---------- Gallery (Photos / Videos): thumb click + prev/next ---------- */
