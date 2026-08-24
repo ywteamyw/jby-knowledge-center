@@ -350,24 +350,60 @@
     apply();
   });
 
-  /* ---------- Gallery (Photos / Videos): thumb click + prev/next ---------- */
+  /* ---------- Lightbox (photo / video viewer) ---------- */
+  var openLightbox = (function(){
+    var lb = document.getElementById("lightbox");
+    if(!lb) return function(){};
+    var media = lb.querySelector(".lb-media"), count = lb.querySelector(".lb-count");
+    var items = [], idx = 0;
+    function render(){
+      var it = items[idx]; if(!it) return;
+      if(it.type === "video"){
+        media.innerHTML = '<div class="lb-frame"><iframe src="https://www.youtube.com/embed/'+it.id+'?rel=0&autoplay=1" title="Jeff Brown Yachts video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>';
+      } else {
+        media.innerHTML = '<img src="'+it.src+'" alt="" />';
+      }
+      if(count) count.textContent = (idx + 1) + " / " + items.length;
+    }
+    function go(d){ idx = (idx + d + items.length) % items.length; render(); }
+    function close(){ lb.classList.remove("open"); lb.setAttribute("aria-hidden","true"); media.innerHTML = ""; document.body.style.overflow = ""; }
+    lb.querySelector(".lb-close").addEventListener("click", close);
+    lb.querySelector(".lb-prev").addEventListener("click", function(){ go(-1); });
+    lb.querySelector(".lb-next").addEventListener("click", function(){ go(1); });
+    lb.addEventListener("click", function(e){ if(e.target === lb) close(); });
+    document.addEventListener("keydown", function(e){
+      if(!lb.classList.contains("open")) return;
+      if(e.key === "Escape") close();
+      else if(e.key === "ArrowLeft") go(-1);
+      else if(e.key === "ArrowRight") go(1);
+    });
+    return function(list, i){ items = list; idx = i || 0; render(); lb.classList.add("open"); lb.setAttribute("aria-hidden","false"); document.body.style.overflow = "hidden"; };
+  })();
+
+  /* ---------- Gallery (Photos / Videos): thumb switch, arrows, open lightbox ---------- */
   document.querySelectorAll(".evgal").forEach(function(g){
     var hero = g.querySelector(".eg-hero img");
+    var heroBox = g.querySelector(".eg-hero");
     var play = g.querySelector(".eg-play");
     var thumbs = [].slice.call(g.querySelectorAll(".eg-thumb"));
     if(!thumbs.length){ return; }
     var cur = 0;
+    var items = thumbs.map(function(t){
+      var vid = t.getAttribute("data-vid");
+      return vid ? {type:"video", id:vid} : {type:"img", src:t.getAttribute("data-full") || (t.querySelector("img")||{}).src};
+    });
     function set(i){
       cur = (i + thumbs.length) % thumbs.length;
       var t = thumbs[cur];
       if(hero){ hero.src = t.getAttribute("data-full") || t.querySelector("img").src; }
-      if(play && t.getAttribute("data-href")){ play.setAttribute("href", t.getAttribute("data-href")); }
       thumbs.forEach(function(x,j){ x.classList.toggle("active", j===cur); });
     }
     thumbs.forEach(function(t,i){ t.addEventListener("click", function(){ set(i); }); });
     var p = g.querySelector(".eg-arrow.prev"), n = g.querySelector(".eg-arrow.next");
     if(p){ p.addEventListener("click", function(){ set(cur-1); }); }
     if(n){ n.addEventListener("click", function(){ set(cur+1); }); }
+    if(heroBox){ heroBox.addEventListener("click", function(){ openLightbox(items, cur); }); }
+    if(play){ play.addEventListener("click", function(e){ e.preventDefault(); openLightbox(items, cur); }); }
   });
 
   /* ---------- Search forms: never submit an empty query ---------- */
