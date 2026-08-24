@@ -105,7 +105,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .vcard .badge{z-index:2}
 @media(hover:none){.vcard::before{display:none}.vcard .thumb video{display:none}}
 @media(prefers-reduced-motion:reduce){.hub-panel.active{animation:none}}
-.kcnav a{position:relative;flex:0 0 auto;padding:26px 0 22px;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--c4);white-space:nowrap;transition:color .25s}
+.kcnav a{position:relative;flex:0 0 auto;padding:26px 0 14px;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--c4);white-space:nowrap;transition:color .25s}
 .kcnav a::after{content:"";position:absolute;left:0;right:0;bottom:-.5px;height:2px;background:var(--navy);transform:scaleX(0);transition:transform .3s ease}
 .kcnav a:hover{color:var(--ink)}
 .kcnav a.active{color:var(--ink)}
@@ -322,7 +322,7 @@ section{position:relative}
 .sidebar{position:sticky;top:120px;display:flex;flex-direction:column;gap:34px}
 .filter-group h4{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:var(--c2);margin-bottom:10px}
 .sub-list{display:flex;flex-direction:column;gap:1px}
-.sub-list a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0;font-size:16px;color:var(--c2);transition:color .2s}
+.sub-list a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0;font-size:16px;font-weight:400;color:var(--c2);transition:color .2s}
 .sub-list a:hover{color:var(--ink)}
 .sub-list a.active{color:var(--navy)}
 .sub-list a .lbl{position:relative}
@@ -516,7 +516,7 @@ section{position:relative}
 .video-body .vb-inner{max-width:820px;margin:0 auto;padding:0 40px;display:flex;flex-direction:column;align-items:center;gap:16px}
 .video-body h1{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:32px;line-height:44px;text-transform:uppercase;color:var(--ink)}
 .video-body .v-sub{font-size:19px;line-height:29px;color:var(--c2);max-width:680px}
-.video-body .v-desc-long{font-size:16px;line-height:26px;color:var(--c2);max-width:640px}
+.video-body .v-desc-long{font-size:17px;line-height:27px;font-weight:400;color:var(--c2);max-width:640px}
 @media(max-width:640px){.video-hero{padding:100px 0 230px}.video-stage{margin-top:-190px;padding:0 22px}.video-body h1{font-size:26px;line-height:36px}}
 
 /* Vessels-on-display mini cards */
