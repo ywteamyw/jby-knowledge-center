@@ -137,7 +137,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .kc-hero .kc-hero-bg::after{content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(24,40,51,.5),rgba(24,40,51,.86)),radial-gradient(120% 120% at 50% -10%,rgba(65,100,123,.35),transparent 60%)}
 .kc-hero-inner{position:relative;z-index:2;max-width:var(--content);margin:0 auto;padding:150px 40px 78px;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:22px}
+  display:flex;flex-direction:column;align-items:center;gap:12px}
+/* group the title + subtitle, then a larger gap before the search */
+.kc-hero.home .searchbar{margin-top:26px}
 .kc-hero h1{font-family:'Mesmerize',sans-serif;font-weight:300;text-transform:uppercase;font-size:clamp(28px,4vw,40px);line-height:1.28;letter-spacing:0;overflow-wrap:break-word}
 .kc-hero p{max-width:900px;font-size:18px;line-height:28px;color:rgba(255,255,255,.92)}
 @media(max-width:640px){.kc-hero h1{font-size:clamp(26px,7.2vw,32px)}.kc-hero-inner{padding:118px 22px 52px}}
@@ -154,7 +156,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 @media(max-width:640px){.kc-hero.sub .kc-hero-inner,.kc-hero .kc-crumbs+.kc-hero-inner{padding-top:20px}.kc-hero .kc-crumbs{padding-top:96px}}
 
 /* Search bar */
-.searchbar{width:100%;max-width:620px;display:flex;align-items:center;gap:14px;background:#fff;border-radius:2px;
+.searchbar{width:100%;max-width:740px;display:flex;align-items:center;gap:14px;background:#fff;border-radius:2px;
   padding:0 6px 0 22px;height:62px;box-shadow:0 30px 70px -40px rgba(0,0,0,.6)}
 .searchbar svg{width:20px;height:20px;color:var(--c4);flex:0 0 auto}
 .searchbar input{flex:1;border:none;outline:none;background:transparent;font-family:'Myriad Pro',sans-serif;font-size:16px;color:var(--ink)}
