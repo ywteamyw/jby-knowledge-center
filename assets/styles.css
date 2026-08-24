@@ -492,7 +492,7 @@ section{position:relative}
 .article-byline{font-family:'Myriad Pro',sans-serif;font-size:16px;color:var(--c2);margin:11px 0 0}
 .article-card .art-rule{border:0;border-top:1px solid var(--border);margin:26px 0 28px}
 .article-body p{font-family:'Myriad Pro',sans-serif;font-size:16px;line-height:26px;color:var(--c2);margin:0 0 20px}
-.article-body h2{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:19px;line-height:27px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);margin:32px 0 12px}
+.article-body h2{font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:18px;line-height:26px;letter-spacing:0;text-transform:none;color:var(--ink);margin:30px 0 12px}
 .article-body a{color:var(--navy);text-decoration:underline;text-underline-offset:2px}
 .article-body a:hover{color:var(--navy-ink)}
 .article-body ul{margin:0 0 20px;padding-left:20px}
