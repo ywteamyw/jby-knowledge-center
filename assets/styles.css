@@ -320,14 +320,15 @@ section{position:relative}
 .list-wrap{display:grid;grid-template-columns:264px 1fr;gap:48px;align-items:start}
 .list-wrap.no-side{grid-template-columns:1fr}
 .sidebar{position:sticky;top:120px;display:flex;flex-direction:column;gap:34px}
-.filter-group h4{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:var(--c2);margin-bottom:10px}
+/* sidebar facets — matched to the jby-site team page: uppercase Myriad heading,
+   grey items, active = near-black with a thin underline under the label word */
+.filter-group h4{font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--c4);margin-bottom:14px}
 .sub-list{display:flex;flex-direction:column;gap:1px}
-.sub-list a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0;font-size:16px;color:var(--c2);transition:color .2s}
+.sub-list a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 2px;font-size:16px;line-height:1.3;color:var(--c2);transition:color .15s}
 .sub-list a:hover{color:var(--ink)}
-.sub-list a.active{color:var(--navy)}
-.sub-list a .lbl{position:relative}
-.sub-list a.active .lbl::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--navy)}
-.sub-list a .n{flex:0 0 auto;font-size:16px;color:var(--c4)}
+.sub-list a.active{color:var(--ink)}
+.sub-list a.active .lbl{box-shadow:inset 0 -1.5px 0 currentColor;padding-bottom:3px}
+.sub-list a .n{flex:0 0 auto;font-size:16px;color:inherit;opacity:.85;font-variant-numeric:tabular-nums}
 @media(max-width:860px){.list-wrap{grid-template-columns:1fr;gap:34px}.sidebar{position:static;flex-direction:row;flex-wrap:wrap;gap:26px 44px}
   .sub-list{flex-direction:row;flex-wrap:wrap;gap:4px 20px}}
 
