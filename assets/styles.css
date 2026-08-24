@@ -577,6 +577,7 @@ footer.site{background:var(--page);padding:48px 40px 40px;color:var(--c2);font-s
 .acard .thumb::after{display:none}          /* no dark wash over the photo */
 .acard .badge{display:none}                 /* category tag off, as on search */
 .acard h3{font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:20px;line-height:28px;
-  letter-spacing:0;text-transform:none;color:var(--ink);padding:20px 22px 0}
+  letter-spacing:0;text-transform:none;color:var(--ink);padding:20px 22px 0;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:56px}
 .acard .date{margin:8px 22px 22px;padding-top:8px;border-top:0.5px solid var(--line);
   font-size:16px;line-height:24px;letter-spacing:0;color:#2a2a36}
