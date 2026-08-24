@@ -486,16 +486,11 @@
     if(inp) inp.value = q0;
     search(q0);
 
-    /* clearing the field (native ✕, or Enter on an empty field) removes results */
+    /* clearing the field (native X) returns to the Knowledge Center home */
     if(inp){
-      var onEmpty = function(){
-        if(!inp.value.trim()){
-          if(history.replaceState) history.replaceState(null,"",location.pathname);
-          search("");
-        }
-      };
-      inp.addEventListener("search", onEmpty);
-      inp.addEventListener("input", onEmpty);
+      inp.addEventListener("search", function(){
+        if(!inp.value.trim()){ window.location.href = "index.html"; }
+      });
     }
   })();
 })();
