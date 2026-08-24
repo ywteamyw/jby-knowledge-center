@@ -259,8 +259,9 @@ section{position:relative}
 .ecard h3{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:18px;line-height:23px;text-transform:uppercase;color:#fff;padding-right:40px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:46px}
 .ecard .ec-meta{font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:14px;line-height:20px;letter-spacing:.02em;color:#fff}
-/* chevron only (no box), on the same line as the title, revealed on hover */
-.ecard .ec-cta{position:absolute;top:18px;right:20px;z-index:3;display:inline-flex;align-items:center;justify-content:center;
+/* chevron only (no box), centered on the title's first line, revealed on hover.
+   top = .ec-body padding-top, height = title line-height, so it sits on line 1 */
+.ecard .ec-cta{position:absolute;top:20px;right:20px;z-index:3;height:23px;display:inline-flex;align-items:center;justify-content:flex-end;
   color:#fff;opacity:0;font-size:0;transition:opacity .3s var(--ease-out)}
 .ecard:hover .ec-cta{opacity:1}
 .ecard .ec-cta svg{width:20px;height:20px}
