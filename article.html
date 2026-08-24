@@ -29,7 +29,6 @@
         <span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="a-rt"></span></span>
         <span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg><span id="a-date"></span></span>
       </div>
-      <p class="article-byline" id="a-byline"></p>
       <hr class="art-rule" />
       <div class="article-body" id="a-body"></div>
     </article>
@@ -164,7 +163,6 @@
   document.getElementById("a-dek").innerHTML = a.dek;
   document.getElementById("a-rt").textContent = a.rt;
   document.getElementById("a-date").textContent = a.date;
-  document.getElementById("a-byline").innerHTML = "Written by " + a.author;
   document.getElementById("a-body").innerHTML =
     '<img class="art-cover" src="assets/img/'+a.img+'" alt="" />'
     + a.body
