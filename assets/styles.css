@@ -320,12 +320,21 @@ section{position:relative}
   .sub-list{flex-direction:row;flex-wrap:wrap;gap:4px 20px}}
 
 /* Pagination */
-.pager{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:56px}
-.pager a,.pager span{min-width:44px;height:44px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:2px;font-size:16px;color:var(--c2);transition:.2s}
-.pager a:hover{border-color:var(--navy);color:var(--navy)}
-.pager .cur{background:var(--navy);color:#fff;border-color:var(--navy)}
-.pager .nav-btn svg{width:16px;height:16px}
-.pager .dots{border:none}
+/* Pagination — per Figma 62285-18275: Back (disabled grey) · number chips
+   (current = black fill/white) · Next (navy, underlined). Mesmerize 12px. */
+.pager{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:56px;font-family:'Mesmerize',sans-serif;font-weight:300}
+.pager .pg-nums{display:flex;align-items:center;gap:4px}
+.pager .pg-num{min-width:36px;height:36px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:2px;background:transparent;color:var(--ink);font-size:12px;line-height:18px;letter-spacing:0;text-transform:uppercase;
+  transition:background .2s,color .2s}
+.pager .pg-num:hover{background:rgba(0,0,0,.05)}
+.pager .pg-num.is-current,.pager .pg-num.is-current:hover{background:#000;color:#fff}
+.pager .pg-prev,.pager .pg-next{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:18px;letter-spacing:0;
+  text-transform:uppercase;color:var(--navy);border-bottom:1px solid var(--navy);padding-bottom:1px;transition:opacity .2s}
+.pager .pg-prev:hover,.pager .pg-next:hover{opacity:.65}
+.pager .pg-prev svg,.pager .pg-next svg{width:16px;height:16px}
+.pager .pg-prev[aria-disabled="true"]{color:#a6a6ab;border-bottom-color:transparent;pointer-events:none}
+@media(max-width:560px){.pager{gap:10px}.pager .pg-num{padding:0 12px}}
 
 /* =====================================================================
    ARTICLE / DETAIL PROSE
