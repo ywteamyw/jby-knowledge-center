@@ -326,10 +326,19 @@
     if(n){ n.addEventListener("click", function(){ set(cur+1); }); }
   });
 
+  /* ---------- Search forms: never submit an empty query ---------- */
+  document.querySelectorAll("form.searchbar").forEach(function(f){
+    f.addEventListener("submit", function(e){
+      var q = f.querySelector('input[name="query"]');
+      if(!q || !q.value.trim()){ e.preventDefault(); if(q) q.focus(); }
+    });
+  });
+
   /* ---------- Search page (search.html?query=…) ------------------------------
      A dedicated results page. It fetches the hub and harvests its own cards
      (so the index never drifts from the markup), matches on all query tokens,
-     and renders results grouped by type in the same card components.          */
+     and renders results grouped by type. An empty query shows only a prompt;
+     clearing the field (native ✕) removes the results.                        */
   (function(){
     var wrap = document.getElementById("sr-wrap");
     if(!wrap || document.body.dataset.kc !== "search") return;   /* search.html only */
@@ -346,11 +355,14 @@
     }
     function param(n){ var m=new RegExp("[?&]"+n+"=([^&]+)").exec(location.search); return m?decodeURIComponent(m[1].replace(/\+/g," ")):""; }
 
-    var q = param("query").trim();
-    var inp = document.getElementById("sr-input"); if(inp) inp.value = q;
-    document.title = (q ? 'Search: '+q : 'Search') + ' — Jeff Brown Yachts';
+    var inp = document.getElementById("sr-input");
+    var cachedDoc = null;
 
-    function render(doc){
+    function showPrompt(){
+      wrap.innerHTML = '<div class="sr-empty"><h2>Search the Knowledge Center</h2>'+
+        '<p>Search for a brand, model, event, or story to find matching videos, past events, and insights.</p></div>';
+    }
+    function renderResults(doc, q){
       var tokens = q.toLowerCase().split(/\s+/).filter(Boolean), total = 0, blocks = "";
       SECTIONS.forEach(function(sec){
         var seen = {}, hits = [];
@@ -369,28 +381,41 @@
       var head = '<div class="sr-head"><div class="sr-title">'+
         '<h1>Results for <span>&ldquo;'+esc(q)+'&rdquo;</span></h1></div>'+
         '<p class="sr-count">'+total+' result'+(total===1?"":"s")+'</p></div>';
-      if(total){
-        wrap.innerHTML = head + blocks;
-      } else {
-        wrap.innerHTML = head +
-          '<div class="sr-empty"><h2>No results for <span>&ldquo;'+esc(q)+'&rdquo;</span></h2>'+
+      wrap.innerHTML = total ? head + blocks
+        : head + '<div class="sr-empty"><h2>No results for <span>&ldquo;'+esc(q)+'&rdquo;</span></h2>'+
           '<p>Try a different search, or browse everything in the Knowledge Center.</p>'+
           '<a class="btn btn-md btn-solid" href="index.html#all"><span>Browse all</span></a></div>';
-      }
       bindHover(wrap);
     }
-
-    if(!q){
-      wrap.innerHTML = '<div class="sr-empty"><h2>Search the Knowledge Center</h2>'+
-        '<p>Search for a brand, model, event, or story to find matching videos, past events, and insights.</p></div>';
-      return;
+    function search(q){
+      q = (q||"").trim();
+      if(!q){ showPrompt(); document.title = "Search — Jeff Brown Yachts"; return; }
+      document.title = "Search: " + q + " — Jeff Brown Yachts";
+      if(cachedDoc){ renderResults(cachedDoc, q); return; }
+      wrap.innerHTML = '<p class="sr-count">Searching…</p>';
+      fetch("index.html").then(function(r){ return r.text(); }).then(function(html){
+        cachedDoc = new DOMParser().parseFromString(html, "text/html");
+        renderResults(cachedDoc, q);
+      }).catch(function(){
+        wrap.innerHTML = '<div class="sr-empty"><p>Unable to load results right now.</p>'+
+          '<a class="btn btn-md btn-solid" href="index.html#all"><span>Browse the Knowledge Center</span></a></div>';
+      });
     }
-    fetch("index.html").then(function(r){ return r.text(); }).then(function(html){
-      render(new DOMParser().parseFromString(html, "text/html"));
-    }).catch(function(){
-      wrap.innerHTML = '<div class="sr-head"><div class="sr-title"><h1>Results for <span>&ldquo;'+esc(q)+'&rdquo;</span></h1></div></div>'+
-        '<div class="sr-empty"><p>Unable to load results right now.</p>'+
-        '<a class="btn btn-md btn-solid" href="index.html#all"><span>Browse the Knowledge Center</span></a></div>';
-    });
+
+    var q0 = param("query").trim();
+    if(inp) inp.value = q0;
+    search(q0);
+
+    /* clearing the field (native ✕, or Enter on an empty field) removes results */
+    if(inp){
+      var onEmpty = function(){
+        if(!inp.value.trim()){
+          if(history.replaceState) history.replaceState(null,"",location.pathname);
+          search("");
+        }
+      };
+      inp.addEventListener("search", onEmpty);
+      inp.addEventListener("input", onEmpty);
+    }
   })();
 })();

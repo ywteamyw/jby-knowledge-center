@@ -40,8 +40,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .btn svg{width:17px;height:17px}
 .btn-solid{background:var(--navy);color:var(--white)}
 .btn-solid:hover{background:var(--navy-d)}
-.btn-white{background:#e4e4e7;color:var(--ink);border:1px solid #e4e4e7}
-.btn-white:hover{background:transparent;color:var(--white);border-color:var(--white)}
+.btn-white{background:var(--white);color:var(--ink);border:1px solid var(--white)}
+.btn-white:hover{background:rgba(255,255,255,.16);color:var(--white);border-color:var(--white)}
 .btn-dark{background:var(--ink);color:var(--white)}
 .btn-dark:hover{background:var(--navy)}
 .btn-ghost{background:transparent;color:var(--c0);border:1px solid var(--c0)}
