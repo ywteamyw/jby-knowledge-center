@@ -165,8 +165,7 @@
   document.getElementById("a-date").textContent = a.date;
   document.getElementById("a-body").innerHTML =
     '<img class="art-cover" src="assets/img/'+a.img+'" alt="" />'
-    + a.body
-    + '<p class="art-source">Source: <a href="'+a.src.u+'" target="_blank" rel="noopener">'+a.src.l+'</a></p>';
+    + a.body;
   document.title = a.t.replace(/&quot;/g,'"').replace(/&amp;/g,"&") + " — Jeff Brown Yachts";
 
   /* Related — three other articles */
