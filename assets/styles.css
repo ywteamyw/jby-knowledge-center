@@ -4,7 +4,7 @@
    Minimum font-size across the platform: 16px.
    ===================================================================== */
 :root{
-  --ink:#1d1d1b;--c0:#000000;--c2:#44444c;--c4:#57575f;
+  --ink:#1d1d1b;--c0:#000000;--c2:#44444c;--c4:#44444c;
   --white:#ffffff;--white-soft:#dcdcde;
   --navy:#41647b;--navy-d:#365466;--navy-deep:#22333f;--navy-ink:#182833;
   --border:#e6e6ea;--line:rgba(0,0,0,0.08);--page:#fcfcfd;--section:#f4f6f9;--sand:#bdb19d;
@@ -484,7 +484,7 @@ section{position:relative}
 .article-top .dh-crumbs li[aria-current]{color:var(--c4)}
 .article-top .dh-crumbs .sep{color:var(--c4)}
 .article-card{max-width:760px;margin:0 auto;background:#fff;border-radius:2px;padding:60px 64px 56px}
-.article-card h1{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:32px;line-height:44px;letter-spacing:0;text-transform:uppercase;color:var(--ink);margin:0 0 18px}
+.article-card h1{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:27px;line-height:37px;letter-spacing:0;text-transform:uppercase;color:var(--ink);margin:0 0 18px}
 .article-dek{font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:18px;line-height:27px;color:var(--c2);margin:0 0 22px}
 .article-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;font-family:'Myriad Pro',sans-serif;font-size:16px;color:var(--c4)}
 .article-meta .mi{display:inline-flex;align-items:center;gap:7px}
@@ -492,7 +492,7 @@ section{position:relative}
 .article-byline{font-family:'Myriad Pro',sans-serif;font-size:16px;color:var(--c2);margin:11px 0 0}
 .article-card .art-rule{border:0;border-top:1px solid var(--border);margin:26px 0 28px}
 .article-body p{font-family:'Myriad Pro',sans-serif;font-size:16px;line-height:26px;color:var(--c2);margin:0 0 20px}
-.article-body h2{font-family:'Myriad Pro',sans-serif;font-weight:700;font-size:17px;line-height:24px;letter-spacing:0;text-transform:none;color:var(--ink);margin:28px 0 12px}
+.article-body h2{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:19px;line-height:27px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);margin:32px 0 12px}
 .article-body a{color:var(--navy);text-decoration:underline;text-underline-offset:2px}
 .article-body a:hover{color:var(--navy-ink)}
 .article-body ul{margin:0 0 20px;padding-left:20px}
